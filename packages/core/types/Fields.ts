@@ -38,7 +38,10 @@ export interface TextareaField extends BaseField {
 export interface SelectField extends BaseField {
   type: "select";
   options: FieldOptions;
-}
+  placeholder?: string;
+  searchable?: boolean;
+  searchPlaceholder?: string;
+};
 
 export interface RadioField extends BaseField {
   type: "radio";
@@ -103,22 +106,32 @@ export type CacheOpts = {
 
 export interface ExternalField<Props extends any = { [key: string]: any }>
   extends BaseField {
-  type: "external";
-  cache?: CacheOpts;
-  placeholder?: string;
-  fetchList: (params: {
-    query: string;
-    filters: Record<string, any>;
-  }) => Promise<any[] | null>;
-  mapProp?: (value: any) => Props;
-  mapRow?: (value: any) => Record<string, string | number | ReactElement>;
-  getItemSummary?: (item: NotUndefined<Props>, index?: number) => string;
-  showSearch?: boolean;
-  renderFooter?: (props: { items: any[] }) => ReactElement;
-  initialQuery?: string;
-  filterFields?: Record<string, Field>;
-  initialFilters?: Record<string, any>;
-}
+    type: "external";
+    cache?: CacheOpts;
+    placeholder?: string;
+    fetchList: (params: {
+      query: string;
+      filters: Record<string, any>;
+      page?: number;
+      limit?: number;
+      sort?: { column: string; direction: "asc" | "desc" };
+    }) => Promise<{ items: any[]; total?: number } | null>;
+    mapProp?: (value: any) => Props;
+    mapRow?: (value: any) => Record<string, string | number | ReactElement>;
+    getItemSummary?: (item: NotUndefined<Props>, index?: number) => string;
+    showSearch?: boolean;
+    renderFooter?: (props: { items: any[] }) => ReactElement;
+    initialQuery?: string;
+    filterFields?: Record<string, Field>;
+    initialFilters?: Record<string, any>;
+    sortableColumns?: string[];
+    pagination?: {
+      enabled?: boolean;
+      pageSizeOptions?: number[];
+      initialPage?: number;
+      initialPageSize?: number;
+    };
+  };
 
 export type CustomFieldRender<Value extends any> = (props: {
   field: CustomField<Value>;
