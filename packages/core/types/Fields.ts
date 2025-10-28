@@ -1,8 +1,8 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 import { DefaultComponentProps, Metadata, UiState } from ".";
 
 type FieldOption = {
-  label: string;
+  label: string | ReactNode;
   value: string | number | boolean | undefined | null | object;
 };
 
@@ -38,6 +38,9 @@ export type TextareaField = BaseField & {
 export type SelectField = BaseField & {
   type: "select";
   options: FieldOptions;
+  placeholder?: string;
+  searchable?: boolean;
+  searchPlaceholder?: string;
 };
 
 export type RadioField = BaseField & {
