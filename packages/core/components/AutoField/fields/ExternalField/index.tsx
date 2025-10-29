@@ -53,10 +53,12 @@ export const ExternalField = ({
           mapProp: deprecatedField.adaptor?.mapProp || validField.mapProp,
           mapRow: validField.mapRow,
           fetchList: deprecatedField.adaptor?.fetchList
-            ? async () =>
-                await deprecatedField.adaptor.fetchList(
+            ? async (params) => {
+                const result = await deprecatedField.adaptor.fetchList(
                   deprecatedField.adaptorParams
-                )
+                );
+                return result ? { items: result } : null;
+              }
             : validField.fetchList,
         }}
         onChange={onChange}
