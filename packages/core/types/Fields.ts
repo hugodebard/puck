@@ -13,6 +13,7 @@ export interface BaseField {
   labelIcon?: ReactElement;
   metadata?: FieldMetadata;
   visible?: boolean;
+  hiddenLabelIcon?: boolean;
 }
 
 export interface TextField extends BaseField {
