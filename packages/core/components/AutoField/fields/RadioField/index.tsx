@@ -28,9 +28,9 @@ export const RadioField = ({
       el="div"
     >
       <div className={getClassName("radioGroupItems")} id={id}>
-        {field.options.map((option) => (
+        {field.options.map((option, index) => (
           <label
-            key={option.label + option.value}
+            key={`${String(option.value ?? index)}`}
             className={getClassName("radio")}
           >
             <input

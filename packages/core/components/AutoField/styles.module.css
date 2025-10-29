@@ -124,11 +124,15 @@ select.Input-input:dir(rtl) {
 }
 
 .Input-radioInner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: var(--puck-color-white);
   color: var(--puck-color-grey-04);
   cursor: pointer;
   font-size: var(--puck-font-size-xxxs);
-  padding: 8px 12px;
+  padding: 8px;
   text-align: center;
   transition: background-color 50ms ease-in;
 }
