@@ -50,7 +50,7 @@ export function createFieldContentful<T extends Entry = Entry>(
         query,
       });
 
-      return entries.items;
+      return { items: entries.items, total: entries.total };
     },
     mapRow: ({ fields }) => fields,
     getItemSummary: (item) =>
