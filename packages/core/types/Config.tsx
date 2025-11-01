@@ -35,6 +35,14 @@ type WithPartialProps<T, Props extends DefaultComponentProps> = Omit<
 
 export interface ComponentConfigExtensions {}
 
+export type FieldGroup<
+  FieldProps extends DefaultComponentProps = DefaultComponentProps
+> = {
+  title?: string;
+  fields: (keyof FieldProps)[];
+  defaultExpanded?: boolean;
+};
+
 type ComponentConfigInternal<
   RenderProps extends DefaultComponentProps,
   FieldProps extends DefaultComponentProps,
@@ -45,6 +53,7 @@ type ComponentConfigInternal<
   label?: string;
   defaultProps?: FieldProps;
   fields?: Fields<FieldProps, UserField>;
+  fieldGroups?: Record<string, FieldGroup<FieldProps>>;
   permissions?: Partial<Permissions>;
   inline?: boolean;
   resolveFields?: (

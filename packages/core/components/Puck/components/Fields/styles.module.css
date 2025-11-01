@@ -7,6 +7,10 @@
   min-height: 48px; /* Ensure there is sufficient room for loader if no fields */
 }
 
+.PuckFields-fieldGroups {
+  border-bottom: 1px solid var(--puck-color-grey-09);
+}
+
 .PuckFields-loadingOverlay {
   background: var(--puck-color-white);
   display: flex;
@@ -36,11 +40,5 @@
 .PuckFields--wrapFields .PuckFields-field {
   color: var(--puck-color-grey-04);
   padding: 16px;
-  padding-bottom: 12px;
   display: block;
-}
-
-.PuckFields--wrapFields .PuckFields-field + .PuckFields-field {
-  border-top: 1px solid var(--puck-color-grey-09);
-  margin-top: 8px;
 }

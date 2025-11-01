@@ -30,6 +30,7 @@ const config = {
 | -------------------------------------------------------- | ----------------------------------------------- | -------- | -------- |
 | [`render()`](#renderprops)                               | `render: () => <div />`                         | Function | Required |
 | [`fields`](#fields)                                      | `fields: { title: { type: "text"} }`            | Object   | -        |
+| [`fieldGroups`](#fieldgroups)                            | `fieldGroups: { content: {...} }`               | Object   | -        |
 | [`defaultProps`](#defaultprops)                          | `defaultProps: { title: "Hello, world" }`       | Object   | -        |
 | [`inline`](#inline)                                      | `inline: true`                                  | Boolean  | -        |
 | [`label`](#label)                                        | `label: "Heading Block"`                        | String   | -        |
@@ -202,6 +203,46 @@ const config = {
     },
   }}
 />
+
+### `fieldGroups`
+
+Organize component fields into collapsible accordion sections in the editor sidebar. This improves the user experience for components with many fields.
+
+```tsx {10-19} copy showLineNumbers
+const config = {
+  components: {
+    Heading: {
+      fields: {
+        text: { type: "text" },
+        level: { type: "select", options: [...] },
+        size: { type: "select", options: [...] },
+        align: { type: "radio", options: [...] },
+      },
+      fieldGroups: {
+        basics: {
+          title: "Basics",
+          fields: ["level"],
+        },
+        typography: {
+          title: "Typography",
+          fields: ["text", "align", "size"],
+        },
+      },
+      render: ({ text, level }) => <h1>{text}</h1>,
+    },
+  },
+};
+```
+
+Each field group is a `Record<string, FieldGroup>` where `FieldGroup` has the following properties:
+
+| Property          | Example                    | Type     | Description                                             |
+| ----------------- | -------------------------- | -------- | ------------------------------------------------------- |
+| `title`           | `"Content"`                | String   | Title displayed in the accordion header                 |
+| `fields`          | `["title", "description"]` | String[] | Array of field names to include in this group           |
+| `defaultExpanded` | `true`                     | Boolean  | Whether the group is open by default (default: `false`) |
+
+Fields not included in any group will be displayed at the top, before any grouped fields.
 
 ### `inline`
 

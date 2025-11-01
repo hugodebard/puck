@@ -11,6 +11,7 @@ import { ItemSelector } from "../../../../lib/data/get-item";
 import { useRegisterFieldsSlice } from "../../../../store/slices/fields";
 import { useShallow } from "zustand/react/shallow";
 import { StoreApi } from "zustand";
+import { FieldGroup } from "../../../FieldGroup";
 
 const getClassName = getClassNameFactory("PuckFields", styles);
 
@@ -174,9 +175,40 @@ const FieldsInternal = ({ wrapFields = true }: { wrapFields?: boolean }) => {
     })
   );
 
+  const fieldGroups = useAppStore((s) => {
+    const componentType = s.selectedItem?.type;
+    if (!componentType) {
+      return s.config.root?.fieldGroups;
+    }
+    return s.config.components[componentType]?.fieldGroups;
+  });
+
   const isLoading = fieldsLoading || componentResolving;
 
   const Wrapper = useMemo(() => overrides.fields || DefaultFields, [overrides]);
+
+  // Organize fields by groups
+  const { groupedFields, ungroupedFields } = useMemo(() => {
+    if (!fieldGroups) {
+      return { groupedFields: [], ungroupedFields: fieldNames };
+    }
+
+    const fieldsInGroups = new Set<string>();
+    const grouped = Object.entries(fieldGroups).map(([key, group]) => ({
+      key,
+      ...group,
+    }));
+
+    // Collect all fields that are in groups
+    grouped.forEach((group) => {
+      group.fields.forEach((field) => fieldsInGroups.add(field as string));
+    });
+
+    // Fields that are not in any group
+    const ungrouped = fieldNames.filter((name) => !fieldsInGroups.has(name));
+
+    return { groupedFields: grouped, ungroupedFields: ungrouped };
+  }, [fieldGroups, fieldNames]);
 
   return (
     <form
@@ -186,9 +218,40 @@ const FieldsInternal = ({ wrapFields = true }: { wrapFields?: boolean }) => {
       }}
     >
       <Wrapper isLoading={isLoading} itemSelector={itemSelector}>
-        {fieldNames.map((fieldName) => (
-          <FieldsChildMemo key={fieldName} fieldName={fieldName} />
-        ))}
+        {fieldGroups ? (
+          <>
+            <div className={getClassName("fieldGroups")}>
+              {ungroupedFields.length > 0 && (
+                <>
+                  {ungroupedFields.map((fieldName) => (
+                    <FieldsChildMemo key={fieldName} fieldName={fieldName} />
+                  ))}
+                </>
+              )}
+            </div>
+            {groupedFields.map((group) => (
+              <FieldGroup
+                key={group.key}
+                id={`${id || "root"}_${group.key}`}
+                title={group.title || group.key}
+                defaultExpanded={group.defaultExpanded ?? false}
+              >
+                {group.fields.map((fieldName) => (
+                  <FieldsChildMemo
+                    key={fieldName as string}
+                    fieldName={fieldName as string}
+                  />
+                ))}
+              </FieldGroup>
+            ))}
+          </>
+        ) : (
+          <>
+            {fieldNames.map((fieldName) => (
+              <FieldsChildMemo key={fieldName} fieldName={fieldName} />
+            ))}
+          </>
+        )}
       </Wrapper>
       {isLoading && (
         <div className={getClassName("loadingOverlay")}>
