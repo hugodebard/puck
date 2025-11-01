@@ -26,6 +26,12 @@ export type UiState = {
       expanded?: boolean;
     }
   >;
+  fieldGroups?: Record<
+    string,
+    {
+      expanded?: boolean;
+    }
+  >;
   isDragging: boolean;
   viewports: {
     current: {
