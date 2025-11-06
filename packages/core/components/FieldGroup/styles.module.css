@@ -1,7 +1,5 @@
 .FieldGroup {
   max-width: 100%;
-}
-.FieldGroup:not(:last-of-type) {
   border-bottom: 1px solid var(--puck-color-grey-09);
 }
 
