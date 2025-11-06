@@ -220,15 +220,14 @@ const FieldsInternal = ({ wrapFields = true }: { wrapFields?: boolean }) => {
       <Wrapper isLoading={isLoading} itemSelector={itemSelector}>
         {fieldGroups ? (
           <>
-            <div className={getClassName("fieldGroups")}>
-              {ungroupedFields.length > 0 && (
-                <>
-                  {ungroupedFields.map((fieldName) => (
-                    <FieldsChildMemo key={fieldName} fieldName={fieldName} />
-                  ))}
-                </>
-              )}
-            </div>
+            {ungroupedFields.length > 0 && (
+              <div className={getClassName("fieldGroups")}>
+                {ungroupedFields.map((fieldName) => (
+                  <FieldsChildMemo key={fieldName} fieldName={fieldName} />
+                ))}
+              </div>
+            )}
+
             {groupedFields.map((group) => (
               <FieldGroup
                 key={group.key}
