@@ -1,0 +1,219 @@
+import { ConfigPreview } from "@/docs/components/Preview";
+
+# Checkbox
+
+Render a `checkbox` input group with a list of options. Extends [Base](base).
+
+By default, the layout is **Inline Layout**.
+
+<ConfigPreview
+  label="Example"
+  componentConfig={{
+    fields: {
+      features: {
+        type: "checkbox",
+        options: [
+          { label: "Search", value: "search" },
+          { label: "Analytics", value: "analytics" },
+          { label: "Automation", value: "automation" },
+        ],
+        // layout: "inline", // default is inline
+      },
+    },
+    defaultProps: {
+      features: ["search"],
+    },
+    render: ({ features }) => {
+      return <p style={{ margin: 0 }}>Selected: {features?.join(", ")}</p>;
+    },
+  }}
+/>
+
+```tsx {5-12} copy
+const config = {
+  components: {
+    Example: {
+      fields: {
+        features: {
+          type: "checkbox",
+          options: [
+            { label: "Search", value: "search" },
+            { label: "Analytics", value: "analytics" },
+            { label: "Automation", value: "automation" },
+          ],
+        },
+      },
+      defaultProps: {
+        features: ["search"],
+      },
+      render: ({ features }) => {
+        return <p>Selected: {features?.join(", ")}</p>;
+      },
+    },
+  },
+};
+```
+
+## Layout examples
+
+### Vertical
+
+<ConfigPreview
+  label="Vertical layout"
+  componentConfig={{
+    fields: {
+      features: {
+        type: "checkbox",
+        options: [
+          { label: "Search", value: "search" },
+          { label: "Analytics", value: "analytics" },
+          { label: "Automation", value: "automation" },
+        ],
+        layout: "vertical",
+      },
+    },
+    defaultProps: {
+      features: ["analytics"],
+    },
+    render: ({ features }) => {
+      return <p style={{ margin: 0 }}>Selected: {features?.join(", ")}</p>;
+    },
+  }}
+/>
+
+```tsx {12} copy
+const config = {
+  components: {
+    Example: {
+      fields: {
+        features: {
+          type: "checkbox",
+          options: [
+            { label: "Search", value: "search" },
+            { label: "Analytics", value: "analytics" },
+            { label: "Automation", value: "automation" },
+          ],
+          layout: "vertical",
+        },
+      },
+      defaultProps: { features: ["analytics"] },
+      render: ({ features }) => <p>Selected: {features?.join(", ")}</p>,
+    },
+  },
+};
+```
+
+### Horizontal
+
+<ConfigPreview
+  label="Horizontal layout"
+  componentConfig={{
+    fields: {
+      features: {
+        type: "checkbox",
+        options: [
+          { label: "Search", value: "search" },
+          { label: "Analytics", value: "analytics" },
+          { label: "Automation", value: "automation" },
+        ],
+        layout: "horizontal",
+      },
+    },
+    defaultProps: {
+      features: ["automation"],
+    },
+    render: ({ features }) => {
+      return <p style={{ margin: 0 }}>Selected: {features?.join(", ")}</p>;
+    },
+  }}
+/>
+
+```tsx {12} copy
+const config = {
+  components: {
+    Example: {
+      fields: {
+        features: {
+          type: "checkbox",
+          options: [
+            { label: "Search", value: "search" },
+            { label: "Analytics", value: "analytics" },
+            { label: "Automation", value: "automation" },
+          ],
+          layout: "horizontal",
+        },
+      },
+      defaultProps: { features: ["automation"] },
+      render: ({ features }) => <p>Selected: {features?.join(", ")}</p>,
+    },
+  },
+};
+```
+
+## Params
+
+| Param                 | Example                                               | Type                                     | Status   |
+| --------------------- | ----------------------------------------------------- | ---------------------------------------- | -------- |
+| [`type`](#type)       | `type: "checkbox"`                                    | "checkbox"                               | Required |
+| [`options`](#options) | `options: [{ label: "Option 1", value: "option-1" }]` | Object[]                                 | Required |
+| [`layout`](#layout)   | `layout: "inline"`                                    | `"inline" \| "vertical" \| "horizontal"` | -        |
+
+## Required params
+
+### `type`
+
+The type of the field. Must be `"checkbox"` for Checkbox fields.
+
+```tsx {6} copy
+const config = {
+  components: {
+    Example: {
+      fields: {
+        features: {
+          type: "checkbox",
+          options: [
+            { label: "Search", value: "search" },
+            { label: "Analytics", value: "analytics" },
+            { label: "Automation", value: "automation" },
+          ],
+        },
+      },
+      // ...
+    },
+  },
+};
+```
+
+### `options`
+
+The options for the checkbox field. The `value` can be a String, Number or Boolean.
+
+```tsx {7-11} copy
+const config = {
+  components: {
+    Example: {
+      fields: {
+        features: {
+          type: "checkbox",
+          options: [
+            { label: "Search", value: "search" },
+            { label: "Analytics", value: "analytics" },
+            { label: "Automation", value: "automation" },
+          ],
+        },
+      },
+      // ...
+    },
+  },
+};
+```
+
+## Optional params
+
+### `layout`
+
+Controls how options are displayed.
+
+- `inline` (default): Checkbox input and label appear inline, stacked vertically per option.
+- `vertical`: Button-like labels stacked vertically.
+- `horizontal`: Button-like labels arranged in a row and wrapped.

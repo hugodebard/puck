@@ -13,6 +13,7 @@ import {
   useState,
 } from "react";
 import {
+  CheckboxField,
   RadioField,
   SelectField,
   ExternalField,
@@ -135,6 +136,7 @@ export type FieldPropsInternal<ValueType = any, F = Field<any>> = FieldProps<
 
 const defaultFields = {
   array: ArrayField,
+  checkbox: CheckboxField,
   external: ExternalField,
   object: ObjectField,
   select: SelectField,
@@ -171,6 +173,7 @@ function AutoFieldInternal<
     () => ({
       ...overrides.fieldTypes,
       array: overrides.fieldTypes?.array || defaultFields.array,
+      checkbox: overrides.fieldTypes?.checkbox || defaultFields.checkbox,
       external: overrides.fieldTypes?.external || defaultFields.external,
       object: overrides.fieldTypes?.object || defaultFields.object,
       select: overrides.fieldTypes?.select || defaultFields.select,
