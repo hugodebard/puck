@@ -176,6 +176,133 @@ select.Input-input:dir(rtl) {
   width: 1px;
 }
 
+/* Checkbox styles */
+.Input-checkboxGroupItems {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.Input-checkboxGroupItems--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.Input-checkboxGroupItems--inline {
+  flex-direction: column;
+  gap: 8px;
+}
+
+.Input-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.Input-checkboxGroupItems--inline .Input-checkbox {
+  gap: 8px;
+  align-items: flex-end;
+}
+
+.Input-checkbox:has(:focus-visible) {
+  outline: 2px solid var(--puck-color-azure-05);
+  outline-offset: 2px;
+}
+
+.Input-checkboxInner {
+  border: 1px solid var(--puck-color-grey-09);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  background-color: var(--puck-color-white);
+  color: var(--puck-color-grey-04);
+  cursor: pointer;
+  font-size: var(--puck-font-size-xxxs);
+  padding: 8px;
+  flex: 1;
+  transition: background-color 50ms ease-in;
+}
+
+.Input-checkboxGroupItems--inline .Input-checkboxInner {
+  border: none;
+  border-radius: 0;
+  padding: 0;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .Input-checkboxGroupItems:not(.Input-checkboxGroupItems--inline)
+    .Input-checkboxInner:hover {
+    background-color: var(--puck-color-azure-12);
+    transition: none;
+  }
+}
+
+.Input--readOnly .Input-checkboxInner {
+  background-color: var(--puck-color-white);
+  color: var(--puck-color-grey-04);
+  cursor: default;
+}
+
+.Input-checkboxInput {
+  width: 20px;
+  height: 20px;
+  appearance: none;
+  background-color: var(--color-white);
+  vertical-align: middle;
+  color: red;
+  border-radius: 0.25rem;
+  border: 1px solid var(--puck-color-grey-09);
+}
+
+.Input-checkboxInput:checked {
+  background-color: var(--puck-color-azure-11);
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%230158AD' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L6.5 9.086l4.293-4.293a1 1 0 0 1 1.414 0z'/%3E%3C/svg%3E");
+}
+
+.Input-checkbox .Input-checkboxInput:checked ~ .Input-checkboxInner {
+  background-color: var(--puck-color-azure-11);
+  color: var(--puck-color-azure-04);
+  font-weight: 500;
+}
+
+.Input-checkboxGroupItems--inline
+  .Input-checkbox
+  .Input-checkboxInput:checked
+  ~ .Input-checkboxInner {
+  background-color: transparent;
+  color: var(--puck-color-grey-04);
+  font-weight: normal;
+}
+
+.Input--readOnly .Input-checkboxInput:checked ~ .Input-checkboxInner {
+  background-color: var(--puck-color-grey-11);
+  color: var(--puck-color-grey-04);
+}
+
+.Input--readOnly .Input-checkboxInput:checked {
+  background-color: var(--puck-color-azure-11);
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg viewBox='0 0 16 16' fill='%235A5A5A' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M12.207 4.793a1 1 0 0 1 0 1.414l-5 5a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L6.5 9.086l4.293-4.293a1 1 0 0 1 1.414 0z'/%3E%3C/svg%3E");
+}
+
+.Input-checkbox .Input-checkboxInput {
+  clip: rect(0 0 0 0);
+  clip-path: inset(100%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+.Input-checkboxGroupItems--inline .Input-checkbox .Input-checkboxInput {
+  position: static;
+  clip: auto;
+  clip-path: none;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+}
+
 textarea.Input-input {
   margin-bottom: -4px; /* Remove strange bottom border */
 }

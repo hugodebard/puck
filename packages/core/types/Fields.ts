@@ -49,6 +49,12 @@ export interface RadioField extends BaseField {
   options: FieldOptions;
 }
 
+export interface CheckboxField extends BaseField {
+  type: "checkbox";
+  options: FieldOptions;
+  layout?: "vertical" | "horizontal" | "inline";
+}
+
 export interface ArrayField<
   Props extends { [key: string]: any }[] = { [key: string]: any }[],
   UserField extends {} = {}
@@ -162,6 +168,7 @@ export type Field<ValueType = any, UserField extends {} = {}> =
   | TextareaField
   | SelectField
   | RadioField
+  | CheckboxField
   | ArrayField<
       ValueType extends { [key: string]: any }[] ? ValueType : never,
       UserField
