@@ -249,9 +249,10 @@ select.Input-input:dir(rtl) {
   appearance: none;
   background-color: var(--color-white);
   vertical-align: middle;
-  color: red;
+  color: var(--puck-color-azure-04);
   border-radius: 0.25rem;
   border: 1px solid var(--puck-color-grey-09);
+  box-shadow: none;
 }
 
 .Input-checkboxInput:checked {
