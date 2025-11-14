@@ -338,11 +338,10 @@ export function AutoField<
   FieldType extends FieldNoLabel<ValueType> = FieldNoLabel<ValueType>
 >(props: FieldProps<FieldType, ValueType>) {
   const DefaultLabel = useMemo(() => {
-    const DefaultLabel = (labelProps: any) => (
-      <div
-        {...labelProps}
-        className={getClassName({ readOnly: props.readOnly })}
-      />
+    const DefaultLabel = ({ children }: any) => (
+      <div className={getClassName({ readOnly: props.readOnly })}>
+        {children}
+      </div>
     );
 
     return DefaultLabel;
